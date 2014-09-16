@@ -1,0 +1,16 @@
+{
+  "name": "feature-app",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dan Crews <crewsd@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "experiment": "git+https://github.com/fs-webdev/experiment.git",
+    "express": "^4.9.0",
+    "feature-client": "git+https://github.com/fs-webdev/feature-client.git"
+  }
+}
