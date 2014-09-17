@@ -18,6 +18,13 @@ var featureConfig = {
     },
     'reallyNewExp',
   ],
+  shared: {
+    repo: 'fs-webdev/theme-engage',
+    experiments: [
+      'sharedExp1',
+      { name: 'sharedExp2', },
+    ],
+  }
   // subscription: 'push',
   // subscription: 300000,
 };
