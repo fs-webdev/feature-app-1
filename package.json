@@ -11,6 +11,6 @@
   "dependencies": {
     "experiment": "git+https://github.com/fs-webdev/experiment.git",
     "express": "^4.9.0",
-    "feature-client": "git+https://github.com/fs-webdev/feature-client.git"
+    "feature-client": "^0.1.0"
   }
 }
