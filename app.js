@@ -6,8 +6,6 @@ var app = express()
   , PORT = process.env.PORT || 5000;
 
 var featureConfig = {
-  name: 'sampleApp',
-  devKey: devKey,
   experiments: [
     'basicExp',
     { name: 'objectedExp', },
@@ -35,13 +33,13 @@ app.get('/', function(req, res) {
   res.send(418);
 });
 
-feature.announce().then(function() {
+feature.announce(function(err, data) {
+  var msg = 'i\'s ready! u\'s ready?';
+  if (err) {
+    console.error('App Crashing!: ', err);
+    msg = 'ready anyway... fail';
+  }
   app.listen(PORT, function() {
-    console.info('i\'s ready! u\'s ready?');
-  });
-}, function(err) {
-  console.error('App Crashing!: ', err);
-  app.listen(PORT, function() {
-    console.info('ready anyway... fail');
+    console.info(msg);
   });
 });
