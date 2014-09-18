@@ -1,6 +1,6 @@
 {
-  "name": "feature-app",
-  "version": "0.0.0",
+  "name": "feature-express-app",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,6 @@
   "author": "Dan Crews <crewsd@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "experiment": "git+https://github.com/fs-webdev/experiment.git",
     "express": "^4.9.0",
     "feature-client": "^0.1.0"
   }
