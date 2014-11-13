@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.9.0",
-    "feature-client": "^0.1.0"
+    "feature-client": "^0.1.0",
+    "xpr-feature": "git+https://github.com/xprmntl/xpr-feature.git"
   }
 }

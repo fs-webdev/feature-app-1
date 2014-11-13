@@ -1,11 +1,18 @@
 var express = require('express')
   , featureClient = require('feature-client');
 
+// XPRMNTL plugins
+featureClient.use(require('xpr-feature'));
+
+
 var app = express()
-  , devKey = process.env.FEATURE_DEVKEY || ''
   , PORT = process.env.PORT || 5000;
 
+app.use(featureClient.getMiddleware());
+
 var featureConfig = {
+  timeout: 10000,
+  reference: 'local',
   experiments: [
     'basicExp',
     { name: 'objectedExp', },
@@ -17,29 +24,34 @@ var featureConfig = {
     'reallyNewExp',
   ],
   shared: {
-    repo: 'fs-webdev/theme-engage',
     experiments: [
       'sharedExp1',
       { name: 'sharedExp2', },
     ],
   }
-  // subscription: 'push',
-  // subscription: 300000,
 };
 
-var feature = featureClient.configure(featureConfig);
-
 app.get('/', function(req, res) {
+  if (req.feature('basicExp')) {
+    return res.send(200);
+  }
+
   res.send(418);
 });
 
-feature.announce(function(err, data) {
-  var msg = 'i\'s ready! u\'s ready?';
-  if (err) {
-    console.error('App Crashing!: ', err);
-    msg = 'ready anyway... fail';
-  }
-  app.listen(PORT, function() {
-    console.info(msg);
+featureClient
+  .configure(featureConfig)
+  // .cron('* * * * *', function(err, exp) {
+  //   console.log('MOAR', exp);
+  // })
+  .announce(function(err, data) {
+
+    var msg = 'i\'s ready! u\'s ready?';
+    if (err) {
+      console.error('App Crashing!: ', err);
+      msg = 'ready anyway... fail';
+    }
+    app.listen(PORT, function() {
+      console.info(msg);
+    });
   });
-});
