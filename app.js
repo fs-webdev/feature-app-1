@@ -1,14 +1,16 @@
 var express = require('express')
-  , featureClient = require('feature-client');
+  , cookieParser = require('cookie-parser')
+  , featureClient = require('feature-client')
+  , xprExpress = require('xpr-express')();
 
 // XPRMNTL plugins
-featureClient.use(require('xpr-feature'));
-
+featureClient.use(xprExpress);
 
 var app = express()
   , PORT = process.env.PORT || 5000;
 
-app.use(featureClient.getMiddleware());
+app.use(cookieParser());
+app.use(featureClient.express);
 
 var featureConfig = {
   timeout: 10000,
@@ -41,7 +43,7 @@ app.get('/', function(req, res) {
 
 featureClient
   .configure(featureConfig)
-  // .cron('* * * * *', function(err, exp) {
+  // .cron('*/15 * * * * *', function(err, exp) {
   //   console.log('MOAR', exp);
   // })
   .announce(function(err, data) {
@@ -51,6 +53,7 @@ featureClient
       console.error('App Crashing!: ', err);
       msg = 'ready anyway... fail';
     }
+    console.log(data);
     app.listen(PORT, function() {
       console.info(msg);
     });

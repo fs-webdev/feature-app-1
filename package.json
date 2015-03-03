@@ -8,8 +8,9 @@
   },
   "author": "Dan Crews <crewsd@gmail.com>",
   "dependencies": {
-    "express": "^4.9.0",
+    "cookie-parser": "^1.3.4",
+    "express": "^4.12.2",
     "feature-client": "^0.9.0",
-    "xpr-feature": "git+https://github.com/xprmntl/xpr-feature.git"
+    "xpr-express": "git+https://github.com/xprmntl/xpr-express.git"
   }
 }
