@@ -1,15 +1,24 @@
 var express = require('express')
   , cookieParser = require('cookie-parser')
   , featureClient = require('feature-client')
-  , xprExpress = require('xpr-express')();
+  , xprExpress = require('xpr-express');
 
 // XPRMNTL plugins
-featureClient.use(xprExpress);
+featureClient.use(xprExpress());
 
 var app = express()
   , PORT = process.env.PORT || 5000;
 
 app.use(cookieParser());
+
+app.use(function(req, res, next) {
+  req.user = {
+    id: 'myID',
+    name: 'Test McTesters',
+  };
+  next();
+});
+
 app.use(featureClient.express);
 
 var featureConfig = {
@@ -35,10 +44,10 @@ var featureConfig = {
 
 app.get('/', function(req, res) {
   if (req.feature('basicExp')) {
-    return res.send(200);
+    return res.sendStatus(200);
   }
 
-  res.send(418);
+  res.sendStatus(418);
 });
 
 featureClient
