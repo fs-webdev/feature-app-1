@@ -1,0 +1,6 @@
+version: v1.5.0
+ignore: {}
+patch:
+  'npm:ms:20151024':
+    - feature-client > superagent > debug > ms:
+        patched: '2016-12-13T20:47:16.669Z'
